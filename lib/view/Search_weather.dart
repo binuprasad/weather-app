@@ -25,7 +25,7 @@ class SearchWeather extends StatelessWidget {
             children: [
               AppConstants.height30,
                  SearchBarWidget(searchController: searchController),
-                 Obx(() => searchController.isSearch.value? const SearchResult():      Column(
+                 Obx(() => searchController.isSearch.value?  SearchResult():      Column(
                 children: [
                   
                   AppConstants.height20,
@@ -44,7 +44,11 @@ class SearchWeather extends StatelessWidget {
                               fontWeight: FontWeight.bold, fontSize: 30),
                         ),
                       ),
-                      const ImageIcon(AssetImage('assets/navigation.png'))
+                      InkWell(
+                        onTap: () {
+                          searchController.weatherData();
+                        },
+                        child: const ImageIcon(AssetImage('assets/navigation.png')))
                     ],
                   ),
                   AppConstants.height10,

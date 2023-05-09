@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:weather_app/consts/appconstants.dart';
+import 'package:weather_app/controller/search_controller.dart';
 import 'package:weather_app/view/detail_page.dart';
 
 class SearchResult extends StatelessWidget {
-  const SearchResult({super.key});
-
+  SearchResult({super.key});
+  final searchController = Get.put(SearchController());
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -51,15 +52,16 @@ class SearchResult extends StatelessWidget {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      const Text(
-                        'Mumbai',
-                        style:
-                            TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+                      Text(
+                        searchController.weather.first.weather.first.main.name
+                            .toString(),
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 30),
                       ),
                       const Text(
                         '20°',
-                        style:
-                            TextStyle(fontSize: 60, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            fontSize: 60, fontWeight: FontWeight.bold),
                       ),
                       Row(
                         children: [
@@ -72,7 +74,7 @@ class SearchResult extends StatelessWidget {
                           ),
                           const Text(
                             'WARNING',
-                            style: TextStyle(color: Colors.amber,fontSize: 16),
+                            style: TextStyle(color: Colors.amber, fontSize: 16),
                           )
                         ],
                       ),

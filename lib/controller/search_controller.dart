@@ -1,9 +1,28 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+import 'package:weather_app/model/weather_model.dart';
+
+import '../service/weather_service.dart';
 
 class SearchController extends GetxController{
+  RxBool isLoading = true.obs;
+  RxDouble lattitude = 0.0.obs;
+  RxDouble longitude = 0.0.obs;
 RxBool isSearch = false.obs;
   var activeIndex=0.obs;
+  List< ListElement> weather = [];
+
+@override
+  void onInit() {
+    if(isLoading.isTrue){
+      getLocation();
+    }
+    super.onInit();
+  }
+
 
 final searchFieldController = TextEditingController();
 PageController controller=PageController();
@@ -19,5 +38,37 @@ List<String> temperature =['31°','20°','25°'];
     isSearch.value =! isSearch.value;
     update();
 
+  }
+
+ void weatherData()async{
+      
+final result=await WeatherServices.weatherdatas(); 
+log("=====================================$result--------------------------------------");
+
+weather=result!.list;
+log("=====================================$weather--------------------------------------");
+ 
+  }
+
+
+  getLocation()async{
+
+    bool isServiceEnabled;
+    isServiceEnabled = await Geolocator.isLocationServiceEnabled();
+    LocationPermission locationPermission;
+    if(!isServiceEnabled){
+      return Future.error('Location not enabled');
+    }
+    locationPermission = await Geolocator.checkPermission();
+    if(locationPermission == LocationPermission.deniedForever){
+      return Future.error('requestlocation is deniedForever');
+
+    }else if(locationPermission == LocationPermission.denied){
+      locationPermission = await Geolocator.requestPermission();
+      if(locationPermission == LocationPermission.denied){
+        return Future.error('permision is denied');
+      }
+
+    }
   }
 }
