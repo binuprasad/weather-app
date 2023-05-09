@@ -38,6 +38,7 @@ class SearchWeather extends StatelessWidget {
                     children: [
                       Obx(
                         () => Text(
+                          // searchController.result?.city.name??'Hyderabad',
                           searchController
                               .location[searchController.activeIndex.value],
                           style: const TextStyle(
@@ -54,6 +55,7 @@ class SearchWeather extends StatelessWidget {
                   AppConstants.height10,
                   Obx(
                     () => Text(
+                    //  "${ searchController.weather.first.main.humidity.toString()}°",
                       searchController
                           .temperature[searchController.activeIndex.value],
                       style: const TextStyle(
@@ -67,7 +69,7 @@ class SearchWeather extends StatelessWidget {
                         : Container(),
                   ),
                   AppConstants.height10,
-                 const WeatherDetailsContainerWidget(),
+                  WeatherDetailsContainerWidget(),
                   AppConstants.height10,
                   const GraphContainerWidget()
                 ],

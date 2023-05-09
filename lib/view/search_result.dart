@@ -53,8 +53,7 @@ class SearchResult extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Text(
-                        searchController.weather.first.weather.first.main.name
-                            .toString(),
+                      searchController.result!.city.name,
                         style: const TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 30),
                       ),

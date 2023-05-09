@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:weather_app/consts/appconstants.dart';
-
 import '../widgets/graph_container_widget.dart';
 import '../widgets/weather_details_container_widget.dart';
 
@@ -27,11 +26,12 @@ class DetailPage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: ElevatedButton(
-                style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
-                onPressed: () {},
-                child: Row(
-                  children: const [Text('Added to list'), Icon(Icons.done)],
-                )),
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
+              onPressed: () {},
+              child: Row(
+                children: const [Text('Added to list'), Icon(Icons.done)],
+              ),
+            ),
           )
         ],
       ),
@@ -58,7 +58,7 @@ class DetailPage extends StatelessWidget {
             ),
             AppConstants.height10,
             AppConstants.height10,
-            const WeatherDetailsContainerWidget(),
+             WeatherDetailsContainerWidget(),
             AppConstants.height10,
             const GraphContainerWidget()
           ],

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:weather_app/consts/appconstants.dart';
+import 'package:weather_app/controller/search_controller.dart';
 
 import 'weather_details_widget.dart';
 
 class WeatherDetailsContainerWidget extends StatelessWidget {
-  const WeatherDetailsContainerWidget({
+   const WeatherDetailsContainerWidget({
     super.key,
   });
-
   @override
   Widget build(BuildContext context) {
     return Container(

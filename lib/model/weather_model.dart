@@ -1,4 +1,6 @@
-
+// To parse this JSON data, do
+//
+//     final weatherModel = weatherModelFromJson(jsonString);
 
 import 'dart:convert';
 
@@ -250,7 +252,7 @@ class Sys {
     };
 }
 
-enum Pod { D, N }
+enum Pod { N, D }
 
 final podValues = EnumValues({
     "d": Pod.D,
@@ -285,7 +287,7 @@ class Weather {
     };
 }
 
-enum Description { OVERCAST_CLOUDS, SCATTERED_CLOUDS, CLEAR_SKY, BROKEN_CLOUDS, LIGHT_RAIN, FEW_CLOUDS }
+enum Description { OVERCAST_CLOUDS, BROKEN_CLOUDS, SCATTERED_CLOUDS, LIGHT_RAIN, FEW_CLOUDS, CLEAR_SKY }
 
 final descriptionValues = EnumValues({
     "broken clouds": Description.BROKEN_CLOUDS,
@@ -296,7 +298,7 @@ final descriptionValues = EnumValues({
     "scattered clouds": Description.SCATTERED_CLOUDS
 });
 
-enum MainEnum { CLOUDS, CLEAR, RAIN }
+enum MainEnum { CLOUDS, RAIN, CLEAR }
 
 final mainEnumValues = EnumValues({
     "Clear": MainEnum.CLEAR,
