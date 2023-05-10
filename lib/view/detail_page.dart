@@ -58,7 +58,7 @@ class DetailPage extends StatelessWidget {
             ),
             AppConstants.height10,
             AppConstants.height10,
-             WeatherDetailsContainerWidget(),
+            const WeatherDetailsContainerWidget(),
             AppConstants.height10,
             const GraphContainerWidget()
           ],

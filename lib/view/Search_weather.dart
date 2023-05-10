@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:weather_app/controller/geolocator.dart';
 import 'package:weather_app/view/search_result.dart';
 import 'package:weather_app/widgets/rain_container_widget.dart';
 import '../consts/appconstants.dart';
@@ -13,6 +14,7 @@ import '../widgets/weather_details_container_widget.dart';
 class SearchWeather extends StatelessWidget {
   SearchWeather({super.key});
   final searchController = Get.put(SearchController());
+  final geoLocatorController = Get.put(LocationController());
 
   @override
   Widget build(BuildContext context) {
@@ -37,12 +39,15 @@ class SearchWeather extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Obx(
-                        () => Text(
+                        () =>
+                          Text(geoLocatorController.currentAddress.value,
+                        // searchController.checkLoading().isTrue?const Text('............'): Text(
+                        //   searchController.city.value,
                           // searchController.result?.city.name??'Hyderabad',
-                          searchController
-                              .location[searchController.activeIndex.value],
+                          // searchController
+                          //     .location[searchController.activeIndex.value],
                           style: const TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 30),
+                              fontWeight: FontWeight.bold, fontSize: 30,color: Colors.black),
                         ),
                       ),
                       InkWell(
@@ -55,7 +60,7 @@ class SearchWeather extends StatelessWidget {
                   AppConstants.height10,
                   Obx(
                     () => Text(
-                    //  "${ searchController.weather.first.main.humidity.toString()}°",
+                    //  "${ searchController.weather.first.main.humidity.toString()}°??"emmpty",
                       searchController
                           .temperature[searchController.activeIndex.value],
                       style: const TextStyle(

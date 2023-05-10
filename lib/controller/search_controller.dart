@@ -9,21 +9,27 @@ import 'package:weather_app/model/weather_model.dart';
 import '../service/weather_service.dart';
 
 class SearchController extends GetxController {
-  RxBool isLoading = true.obs;
-  RxDouble lattitude = 0.0.obs;
-  RxDouble longitude = 0.0.obs;
+  // RxBool isLoading = true.obs;
+  // RxDouble latitude_ = 0.0.obs;
+  // RxDouble longitude_ = 0.0.obs;
   RxBool isSearch = false.obs;
   var activeIndex = 0.obs;
+  // RxBool checkLoading() => isLoading;
+  // RxDouble checkLatitude() => latitude_;
+  // RxDouble checkLongitude() => longitude_;
+  // final city = ''.obs;
   List<ListElement> weather = [];
-WeatherModel? result;
+  WeatherModel? result;
 
   @override
   void onInit() {
-    weatherData();
+   
+    // getAdress(checkLatitude().value, checkLongitude().value);
     // if (isLoading.isTrue) {
     //   getLocation();
-    //   getAdress();
     // }
+     weatherData();
+
     super.onInit();
   }
 
@@ -43,19 +49,14 @@ WeatherModel? result;
   }
 
   void weatherData() async {
-   result = await WeatherServices.weatherdatas();
+    result = await WeatherServices.weatherdatas();
     log("=====================================${result?.city.country}--------------------------------------");
 
 // weather= result?.city as List<ListElement> ;
     weather = result!.list;
 
-   
-
     log("=====================================$weather--------------------------------------");
-
   }
-
-  
 
   // getLocation() async {
   //   bool isServiceEnabled;
@@ -76,15 +77,18 @@ WeatherModel? result;
   //   return await Geolocator.getCurrentPosition(
   //           desiredAccuracy: LocationAccuracy.high)
   //       .then((value) {
-  //     lattitude.value = value.latitude;
-  //     longitude.value = value.longitude;
+  //     latitude_.value = value.latitude;
+  //     longitude_.value = value.longitude;
   //     isLoading.value = false;
-  //     log(lattitude.value.toString());
+  //     log(latitude_.value.toString());
   //   });
   // }
-  // getAdress() async {
-  //   List<Placemark> placeMark =
-  //       await placemarkFromCoordinates(lattitude.value, longitude.value);
-  //   print(placeMark);
+
+  // getAdress(lat, lon) async {
+  //   List<Placemark> placeMark = await placemarkFromCoordinates(lat, lon);
+  //   Placemark place = placeMark[0];
+  //   city.value = place.locality!;
+
+  //   print('placemark-----------$placeMark');
   // }
 }

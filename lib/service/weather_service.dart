@@ -13,10 +13,9 @@ class WeatherServices {
       );
 
       if (response.statusCode! >= 200 && response.statusCode! <= 299) {
-
-        final value=WeatherModel.fromJson(response.data);
-  log(" response=====================${value.city}");
-  return value;
+        final value = WeatherModel.fromJson(response.data);
+        log(" response=====================${value.city}");
+        return value;
       }
     } catch (e) {
       log('something error occured $e');
