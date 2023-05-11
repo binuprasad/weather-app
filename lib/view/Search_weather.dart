@@ -13,73 +13,78 @@ import '../widgets/weather_details_container_widget.dart';
 
 class SearchWeather extends StatelessWidget {
   SearchWeather({super.key});
-  final searchController = Get.put(SearchController());
   final geoLocatorController = Get.put(LocationController());
+  final searchController = Get.put(SearchingController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-    
       body: Padding(
-        padding: const EdgeInsets.only(top: 30, left: 15,right: 15),
+        padding: const EdgeInsets.only(top: 30, left: 15, right: 15),
         child: SingleChildScrollView(
           child: Column(
             children: [
               AppConstants.height30,
-                 SearchBarWidget(searchController: searchController),
-                 Obx(() => searchController.isSearch.value?  SearchResult():      Column(
-                children: [
-                  
-                  AppConstants.height20,
-                  SmoothIndicatorWidget(searchController: searchController),
-                  AppConstants.height30,
-                  PageviewWidget(searchController: searchController),
-                  AppConstants.height10,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Obx(
-                        () =>
-                          Text(geoLocatorController.currentAddress.value,
-                        // searchController.checkLoading().isTrue?const Text('............'): Text(
-                        //   searchController.city.value,
-                          // searchController.result?.city.name??'Hyderabad',
-                          // searchController
-                          //     .location[searchController.activeIndex.value],
-                          style: const TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 30,color: Colors.black),
-                        ),
+              SearchBarWidget(searchController: searchController),
+              Obx(
+                () => searchController.isSearch.value
+                    ? SearchResult()
+                    : Column(
+                        children: [
+                          AppConstants.height20,
+                          SmoothIndicatorWidget(
+                              searchController: searchController),
+                          AppConstants.height30,
+                          PageviewWidget(searchController: searchController),
+                          AppConstants.height10,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Obx(
+                                () => Text(
+                                  geoLocatorController.currentAddress.value,
+                                  // searchController.checkLoading().isTrue?const Text('............'): Text(
+                                  //   searchController.city.value,
+                                  // searchController.result?.city.name??'Hyderabad',
+                                  // searchController
+                                  //     .location[searchController.activeIndex.value],
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 30,
+                                      color: Colors.black),
+                                ),
+                              ),
+                              InkWell(
+                                  onTap: () {
+                                    searchController.weatherData();
+                                  },
+                                  child: const ImageIcon(
+                                      AssetImage('assets/navigation.png')))
+                            ],
+                          ),
+                          AppConstants.height10,
+                          Obx(
+                            () => Text(
+                              //  "${ searchController.weather.first.main.humidity.toString()}°??"emmpty",
+                              searchController.temperature[
+                                  searchController.activeIndex.value],
+                              style: const TextStyle(
+                                  fontSize: 50, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          AppConstants.height10,
+                          Obx(
+                            () => searchController.activeIndex.value == 1
+                                ? const RainContainerWidget()
+                                : Container(),
+                          ),
+                          AppConstants.height10,
+                          WeatherDetailsContainerWidget(searchController: searchController,),
+                          AppConstants.height10,
+                          const GraphContainerWidget()
+                        ],
                       ),
-                      InkWell(
-                        onTap: () {
-                          searchController.weatherData();
-                        },
-                        child: const ImageIcon(AssetImage('assets/navigation.png')))
-                    ],
-                  ),
-                  AppConstants.height10,
-                  Obx(
-                    () => Text(
-                    //  "${ searchController.weather.first.main.humidity.toString()}°??"emmpty",
-                      searchController
-                          .temperature[searchController.activeIndex.value],
-                      style: const TextStyle(
-                          fontSize: 50, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  AppConstants.height10,
-                  Obx(
-                    () => searchController.activeIndex.value == 1
-                        ? const RainContainerWidget()
-                        : Container(),
-                  ),
-                  AppConstants.height10,
-                  WeatherDetailsContainerWidget(),
-                  AppConstants.height10,
-                  const GraphContainerWidget()
-                ],
-              ), )
-         
+              )
             ],
           ),
         ),
@@ -87,5 +92,3 @@ class SearchWeather extends StatelessWidget {
     );
   }
 }
-
-

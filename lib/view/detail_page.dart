@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:weather_app/consts/appconstants.dart';
+import 'package:weather_app/controller/search_controller.dart';
 import '../widgets/graph_container_widget.dart';
 import '../widgets/weather_details_container_widget.dart';
 
 class DetailPage extends StatelessWidget {
-  const DetailPage({super.key});
-
+   DetailPage({super.key});
+final searchcontroller = Get.put(SearchingController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,7 +59,7 @@ class DetailPage extends StatelessWidget {
             ),
             AppConstants.height10,
             AppConstants.height10,
-            const WeatherDetailsContainerWidget(),
+             WeatherDetailsContainerWidget(searchController: searchcontroller,),
             AppConstants.height10,
             const GraphContainerWidget()
           ],

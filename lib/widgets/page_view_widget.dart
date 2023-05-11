@@ -9,7 +9,7 @@ class PageviewWidget extends StatelessWidget {
     required this.searchController,
   });
 
-  final SearchController searchController;
+  final SearchingController searchController;
 
   @override
   Widget build(BuildContext context) {

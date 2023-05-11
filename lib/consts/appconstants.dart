@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../controller/geolocator.dart';
 
 class AppConstants {
+  final geoLocatorController = Get.put(LocationController());
+
   static const height10 = SizedBox(
     height: 10,
   );
@@ -21,6 +26,7 @@ class AppConstants {
 static const String apikey = 'e2e3e507e74b6d2455338b141cde48a2';
 //apiurl
 static const String baseurl = 'api.openweathermap.org/data/2.5/forecast?id=524901&appid=';
+
 }
 
 

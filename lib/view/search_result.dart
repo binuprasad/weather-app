@@ -6,7 +6,7 @@ import 'package:weather_app/view/detail_page.dart';
 
 class SearchResult extends StatelessWidget {
   SearchResult({super.key});
-  final searchController = Get.put(SearchController());
+  final searchController = Get.put(SearchingController());
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -38,7 +38,7 @@ class SearchResult extends StatelessWidget {
         ),
         AppConstants.height20,
         GestureDetector(
-          onTap: () => Get.to(const DetailPage()),
+          onTap: () => Get.to( DetailPage()),
           child: Container(
             height: AppConstants.height(context) * 0.3,
             decoration: BoxDecoration(
@@ -53,7 +53,7 @@ class SearchResult extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Text(
-                      searchController.result!.city.name,
+                     ' searchController.result!.city.name',
                         style: const TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 30),
                       ),

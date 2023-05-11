@@ -8,7 +8,8 @@ import 'package:weather_app/model/weather_model.dart';
 
 import '../service/weather_service.dart';
 
-class SearchController extends GetxController {
+class SearchingController extends GetxController {
+  var dt = DateTime.now()..obs;
   // RxBool isLoading = true.obs;
   // RxDouble latitude_ = 0.0.obs;
   // RxDouble longitude_ = 0.0.obs;
@@ -18,7 +19,7 @@ class SearchController extends GetxController {
   // RxDouble checkLatitude() => latitude_;
   // RxDouble checkLongitude() => longitude_;
   // final city = ''.obs;
-  List<ListElement> weather = [];
+  List<WeatherModel> weather = [];
   WeatherModel? result;
 
   @override
@@ -50,10 +51,9 @@ class SearchController extends GetxController {
 
   void weatherData() async {
     result = await WeatherServices.weatherdatas();
-    log("=====================================${result?.city.country}--------------------------------------");
 
 // weather= result?.city as List<ListElement> ;
-    weather = result!.list;
+    // weather = result!.name as List<WeatherModel>;
 
     log("=====================================$weather--------------------------------------");
   }

@@ -10,8 +10,8 @@ class SearchBarWidget extends StatelessWidget {
     required this.searchController,
   });
 
-  final SearchController searchController;
-  final searchControllers = Get.put(SearchController());
+  final SearchingController searchController;
+  final searchControllers = Get.put(SearchingController());
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -23,7 +23,7 @@ class SearchBarWidget extends StatelessWidget {
           controller: searchController.searchFieldController,
           decoration: InputDecoration(
             hintText: 'Search Location',
-              suffixIcon: GetBuilder<SearchController>(
+              suffixIcon: GetBuilder<SearchingController>(
                 builder: (controller) => IconButton(
                     onPressed: () {
                       searchControllers.searchButtonOntap();

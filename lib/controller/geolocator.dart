@@ -1,14 +1,20 @@
+
+import 'dart:developer';
+
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 
 class LocationController extends GetxController {
+ static RxString latitude = ''.obs;
+ static RxString longitude = ''.obs;
   RxString currentAddress = 'Unknown Location'.obs;
   dynamic currentPosition = Geolocator.getCurrentPosition().obs;
   RxString currentAdrressToFetchHome = 'unknown location'.obs;
   @override
   void onInit() async {
     await getCurrentPosition();
+    log('oninit');
     super.onInit();
   }
 
@@ -49,6 +55,8 @@ class LocationController extends GetxController {
         .then((Position position) {
       currentPosition = position;
       getAddressFromLatLng(position);
+    
+
     }).catchError(
       (e) {
         // log(e.toString());
@@ -62,10 +70,12 @@ class LocationController extends GetxController {
       currentPosition!.longitude,
     ).then((List<Placemark> placemarks) {
       Placemark place = placemarks[0];
+      
 
-      currentAddress.value =
-          '${place.subLocality},${place.subAdministrativeArea}';
+
+      currentAddress.value = '${place.locality},${place.administrativeArea}';
       currentAdrressToFetchHome.value = place.subAdministrativeArea!;
+   
     }).catchError(
       (e) {
         // log(e.toString());
