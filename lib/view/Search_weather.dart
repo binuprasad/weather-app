@@ -55,31 +55,30 @@ class SearchWeather extends StatelessWidget {
                                 ),
                               ),
                               InkWell(
-                                  onTap: () {
-                                    searchController.weatherData();
-                                  },
-                                  child: const ImageIcon(
-                                      AssetImage('assets/navigation.png')))
+                                onTap: () {
+                                  searchController.weatherData();
+                                },
+                                child: const ImageIcon(
+                                  AssetImage('assets/navigation.png'),
+                                ),
+                              ),
                             ],
                           ),
                           AppConstants.height10,
-                          Obx(
-                            () => Text(
-                              //  "${ searchController.weather.first.main.humidity.toString()}°??"emmpty",
-                              searchController.temperature[
-                                  searchController.activeIndex.value],
-                              style: const TextStyle(
-                                  fontSize: 50, fontWeight: FontWeight.bold),
-                            ),
+                          Text(
+                            //  "${ searchController.weather.first.main.humidity.toString()}°??"emmpty",
+                            '${searchController.result?.main.humidity??'Loading....'}°',
+                            style: const TextStyle(
+                                fontSize: 50, fontWeight: FontWeight.bold),
                           ),
                           AppConstants.height10,
-                          Obx(
-                            () => searchController.activeIndex.value == 1
-                                ? const RainContainerWidget()
-                                : Container(),
-                          ),
+                          searchController.activeIndex.value == 1
+                              ? const RainContainerWidget()
+                              : Container(),
                           AppConstants.height10,
-                          WeatherDetailsContainerWidget(searchController: searchController,),
+                          WeatherDetailsContainerWidget(
+                            searchController: searchController,
+                          ),
                           AppConstants.height10,
                           const GraphContainerWidget()
                         ],
