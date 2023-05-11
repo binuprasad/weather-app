@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:weather_app/consts/appconstants.dart';
 import 'package:weather_app/controller/search_controller.dart';
 
@@ -27,7 +26,7 @@ class WeatherDetailsContainerWidget extends StatelessWidget {
           ),
           WeatherDetailsWidget(
             headerText: 'UV',
-            tailText: searchController.result!.main.temp.toString(),
+            tailText: searchController.result?.main.temp.toString()??'2',
           ),
           const WeatherDetailsWidget(
             headerText: '% RAIN',
@@ -35,7 +34,7 @@ class WeatherDetailsContainerWidget extends StatelessWidget {
           ),
           WeatherDetailsWidget(
             headerText: 'AQ',
-            tailText: searchController.result!.wind.speed.toString(),
+            tailText: searchController.result?.wind.speed.toString()??'20',
           ),
         ],
       ),
