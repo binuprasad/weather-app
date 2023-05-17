@@ -1,34 +1,31 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
-
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:weather_app/model/weather_model.dart';
-
 import '../service/weather_service.dart';
 
 class SearchingController extends GetxController {
   var dt = DateTime.now()..obs;
-  // RxBool isLoading = true.obs;
-  // RxDouble latitude_ = 0.0.obs;
-  // RxDouble longitude_ = 0.0.obs;
+  RxBool isLoading = true.obs;
+  RxDouble latitude_ = 0.0.obs;
+  RxDouble longitude_ = 0.0.obs;
   RxBool isSearch = false.obs;
   var activeIndex = 0.obs;
-  // RxBool checkLoading() => isLoading;
-  // RxDouble checkLatitude() => latitude_;
-  // RxDouble checkLongitude() => longitude_;
+  RxBool checkLoading() => isLoading;
+  RxDouble checkLatitude() => latitude_;
+  RxDouble checkLongitude() => longitude_;
   // final city = ''.obs;
   List<WeatherModel> weather = [];
   WeatherModel? result;
 
   @override
-  void onInit() {
-   
+  void onInit()async{
     // getAdress(checkLatitude().value, checkLongitude().value);
-    // if (isLoading.isTrue) {
-    //   getLocation();
-    // }
-     weatherData();
+    if (isLoading.isTrue) {
+   await   getLocation();
+    }
+    weatherData();
 
     super.onInit();
   }
@@ -49,7 +46,8 @@ class SearchingController extends GetxController {
   }
 
   void weatherData() async {
-    result = await WeatherServices.weatherdatas();
+    result = await WeatherServices.weatherdatas(
+        latitude_.value.toString(), longitude_.value.toString());
 
 // weather= result?.city as List<ListElement> ;
     // weather = result!.name as List<WeatherModel>;
@@ -57,36 +55,35 @@ class SearchingController extends GetxController {
     log("=====================================$weather--------------------------------------");
   }
 
-  // getLocation() async {
-  //   bool isServiceEnabled;
-  //   isServiceEnabled = await Geolocator.isLocationServiceEnabled();
-  //   LocationPermission locationPermission;
-  //   if (!isServiceEnabled) {
-  //     return Future.error('Location not enabled');
-  //   }
-  //   locationPermission = await Geolocator.checkPermission();
-  //   if (locationPermission == LocationPermission.deniedForever) {
-  //     return Future.error('requestlocation is deniedForever');
-  //   } else if (locationPermission == LocationPermission.denied) {
-  //     locationPermission = await Geolocator.requestPermission();
-  //     if (locationPermission == LocationPermission.denied) {
-  //       return Future.error('permision is denied');
-  //     }
-  //   }
-  //   return await Geolocator.getCurrentPosition(
-  //           desiredAccuracy: LocationAccuracy.high)
-  //       .then((value) {
-  //     latitude_.value = value.latitude;
-  //     longitude_.value = value.longitude;
-  //     isLoading.value = false;
-  //     log(latitude_.value.toString());
-  //   });
-  // }
+  getLocation() async {
+    bool isServiceEnabled;
+    isServiceEnabled = await Geolocator.isLocationServiceEnabled();
+    LocationPermission locationPermission;
+    if (!isServiceEnabled) {
+      return Future.error('Location not enabled');
+    }
+    locationPermission = await Geolocator.checkPermission();
+    if (locationPermission == LocationPermission.deniedForever) {
+      return Future.error('requestlocation is deniedForever');
+    } else if (locationPermission == LocationPermission.denied) {
+      locationPermission = await Geolocator.requestPermission();
+      if (locationPermission == LocationPermission.denied) {
+        return Future.error('permision is denied');
+      }
+    }
+    return await Geolocator.getCurrentPosition(
+            desiredAccuracy: LocationAccuracy.high)
+        .then((value) {
+      latitude_.value = value.latitude;
+      longitude_.value = value.longitude;
+      isLoading.value = false;
+      log(latitude_.value.toString());
+    });
+  }
 
   // getAdress(lat, lon) async {
   //   List<Placemark> placeMark = await placemarkFromCoordinates(lat, lon);
   //   Placemark place = placeMark[0];
-  //   city.value = place.locality!;
 
   //   print('placemark-----------$placeMark');
   // }

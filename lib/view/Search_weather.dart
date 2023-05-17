@@ -67,7 +67,7 @@ class SearchWeather extends StatelessWidget {
                           AppConstants.height10,
                           Text(
                             //  "${ searchController.weather.first.main.humidity.toString()}°??"emmpty",
-                            '${searchController.result?.main.humidity??'Loading....'}°',
+                            '${searchController.result?.main.humidity ?? '30'}°',
                             style: const TextStyle(
                                 fontSize: 50, fontWeight: FontWeight.bold),
                           ),

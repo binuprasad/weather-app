@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
-import '../controller/geolocator.dart';
 
 class AppConstants {
-  final geoLocatorController = Get.put(LocationController());
+  // final geoLocatorController = Get.put(LocationController());
+  // final search = Get.put(SearchingController());
 
   static const height10 = SizedBox(
     height: 10,
