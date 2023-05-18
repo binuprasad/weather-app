@@ -18,7 +18,8 @@ class RichTextWidget extends StatelessWidget {
         children: [
           TextSpan(
             text: secondText,
-            style: TextStyle(fontWeight: FontWeight.w500, color: Colors.black),
+            style: const TextStyle(
+                fontWeight: FontWeight.w500, color: Colors.black),
           ),
         ],
       ),

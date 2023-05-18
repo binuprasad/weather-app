@@ -48,6 +48,9 @@ class SearchingController extends GetxController {
   void weatherData() async {
     result = await WeatherServices.weatherdatas(
         latitude_.value.toString(), longitude_.value.toString());
+        log('clouds inn ${result!.main.humidity}');
+        log('temp inn ${result!.main.temp}');
+
 
 // weather= result?.city as List<ListElement> ;
     // weather = result!.name as List<WeatherModel>;

@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:weather_app/consts/appconstants.dart';
 import 'package:weather_app/controller/search_controller.dart';
+import '../controller/geolocator.dart';
 import '../widgets/graph_container_widget.dart';
 import '../widgets/weather_details_container_widget.dart';
 
 class DetailPage extends StatelessWidget {
-   DetailPage({super.key});
-final searchcontroller = Get.put(SearchingController());
+  DetailPage({super.key});
+  final searchcontroller = Get.put(SearchingController());
+  final geoLocatorController = Get.put(LocationController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,8 +32,8 @@ final searchcontroller = Get.put(SearchingController());
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
               onPressed: () {},
-              child: Row(
-                children: const [Text('Added to list'), Icon(Icons.done)],
+              child: const Row(
+                children: [Text('Added to list'), Icon(Icons.done)],
               ),
             ),
           )
@@ -42,24 +45,25 @@ final searchcontroller = Get.put(SearchingController());
             AppConstants.height30,
             Image.asset('assets/sunny.png'),
             AppConstants.height10,
-            Row(
+             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
+              children: [
                 Text(
-                  'Pune',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+                 geoLocatorController.currentAddress.value,
+                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
                 ),
-                ImageIcon(AssetImage('assets/navigation.png'))
+                const ImageIcon(AssetImage('assets/navigation.png'))
               ],
             ),
             AppConstants.height10,
-            const Text(
-              '20°',
-              style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
+             Text(
+            searchcontroller.result!.main.humidity.toString(),
+              style: const TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
             ),
-            AppConstants.height10,
-            AppConstants.height10,
-             WeatherDetailsContainerWidget(searchController: searchcontroller,),
+            AppConstants.height20,
+            WeatherDetailsContainerWidget(
+              searchController: searchcontroller,
+            ),
             AppConstants.height10,
             const GraphContainerWidget()
           ],
